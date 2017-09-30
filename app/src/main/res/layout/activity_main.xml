@@ -37,6 +37,7 @@
         android:layout_below="@+id/iv_robo"
         android:background="#FFF"
         android:hint="Secret"
+        android:inputType="textPassword"
         android:padding="5dp"
         android:textColor="#000"
         />

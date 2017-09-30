@@ -1,5 +1,7 @@
 package com.fireshield.sss;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,18 +31,22 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
 
   }
 
-
   @Override
   public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
   }
 
   @Override
-  public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-    String hash = hash(charSequence.toString());
+  public void onTextChanged(CharSequence charS, int i, int i1, int i2) {
+    String hash = hash(binding.etSecret.getText().toString());
     String miniHash = hash.substring(0, 8);
     Timber.d(miniHash);
     Glide.with(this).load("https://robohash.org/" + miniHash).into(binding.ivRobo);
     binding.tvHashMin.setText(miniHash);
+    String yourHashPassword = hash(binding.etSecret.getText().toString() + binding.etSecret.getText().toString()).substring(0, 16);
+    Timber.d(yourHashPassword);
+    ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+    ClipData clip = ClipData.newPlainText("hash", yourHashPassword);
+    clipboard.setPrimaryClip(clip);
   }
 
   @Override
@@ -49,14 +55,12 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
 
   private String hash(String toHash) {
     try {
-      Timber.e("HASHEANDO");
       MessageDigest digest = MessageDigest.getInstance("SHA-512");
       byte[] bytes = toHash.getBytes("UTF-8");
       digest.update(bytes, 0, bytes.length);
       bytes = digest.digest();
 
       String hash = bytesToHex(bytes).toLowerCase();
-      Timber.d("HASH -  " + hash);
       return hash;
     } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
       e.printStackTrace();
