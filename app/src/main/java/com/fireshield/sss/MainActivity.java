@@ -38,11 +38,9 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
   public void onTextChanged(CharSequence charS, int i, int i1, int i2) {
     String hash = hash(binding.etSecret.getText().toString());
     String miniHash = hash.substring(0, 8);
-    Timber.d(miniHash);
     Glide.with(this).load("https://robohash.org/" + miniHash).into(binding.ivRobo);
     binding.tvHashMin.setText(miniHash);
     String yourHashPassword = hash(binding.etSecret.getText().toString() + binding.etSecret.getText().toString()).substring(0, 16);
-    Timber.d(yourHashPassword);
     ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
     ClipData clip = ClipData.newPlainText("hash", yourHashPassword);
     clipboard.setPrimaryClip(clip);
