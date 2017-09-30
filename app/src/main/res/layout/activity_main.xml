@@ -39,7 +39,10 @@
         android:hint="Secret"
         android:inputType="textPassword"
         android:padding="5dp"
+        android:singleLine="true"
         android:textColor="#000"
+        android:textColorHint="#999"
+        android:textSize="18sp"
         />
 
     <EditText
@@ -52,7 +55,10 @@
         android:background="#FFF"
         android:hint="Service"
         android:padding="5dp"
+        android:singleLine="true"
         android:textColor="#000"
+        android:textColorHint="#999"
+        android:textSize="18sp"
         />
 
   </RelativeLayout>
