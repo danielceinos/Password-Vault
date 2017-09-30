@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity implements TextWatcher {
 
-  ActivityMainBinding binding;
+  private ActivityMainBinding binding;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements TextWatcher {
     binding.etSecret.addTextChangedListener(this);
     binding.etService.addTextChangedListener(this);
     Glide.with(this).load("https://robohash.org/" + (Math.random())).into(binding.ivRobo);
-
   }
 
   @Override
